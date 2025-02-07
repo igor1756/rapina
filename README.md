@@ -213,6 +213,20 @@ Algumas distribuições Linux (Fedora 34, por exemplo) podem encontrar problemas
 
     `sudo update-ca-trust`
 
+**Ubuntu - Solução adicional** 
+
+1. Baixe o certificado do site da B3:
+
+    `echo -n | openssl s_client -showcerts -servername bvmf.bmfbovespa.com.br -connect bvmf.bmfbovespa.com.br:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/b3-cert.crt`
+
+2. Importar .crt arquivos para pasta de certificados
+
+    `sudo cp /tmp/b3-cert.crt /usr/local/share/ca-certificates/`
+
+3. Atualizar base de trusted certificates
+
+    `sudo update-ca-certificates`
+
 # 6. Como compilar
 
 Se quiser compilar seu próprio executável, primeiro [baixe e instale](https://golang.org/dl/) o compilador Go (v1.16 ou maior). Depois execute estes passos:

@@ -112,6 +112,20 @@ Some Linux distributions (e.g. Fedora 34) might face some issues regarding the s
 
     `sudo update-ca-trust`
 
+**Ubuntu - Additional Solution** 
+
+1. Download the certificate from the B3 website:
+
+    `echo -n | openssl s_client -showcerts -servername bvmf.bmfbovespa.com.br -connect bvmf.bmfbovespa.com.br:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/b3-cert.crt`
+
+2. Import .crt files into the certificates folder:
+
+    `sudo cp /tmp/b3-cert.crt /usr/local/share/ca-certificates/`
+
+3. Update the trusted certificates database:
+
+    `sudo update-ca-certificates`
+
 
 # 4. How to compile
 
